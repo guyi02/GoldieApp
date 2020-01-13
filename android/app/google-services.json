@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "901366381782",
+    "firebase_url": "https://appgoldie-34083.firebaseio.com",
+    "project_id": "appgoldie-34083",
+    "storage_bucket": "appgoldie-34083.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901366381782:android:c7f4c68cf67be8fb4d1d77",
+        "android_client_info": {
+          "package_name": "com.goldieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901366381782-cfnon9rcqjb0kgsj61k7316e3lfv1q9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArBmjJGomCJAPOLNtM_PGyIQyh7BEcnBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "901366381782-cfnon9rcqjb0kgsj61k7316e3lfv1q9g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

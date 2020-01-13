@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 
 import {
-  View,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
-
-import {
   Container,
   HeaderArea,
   RowHeader,
@@ -25,8 +16,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ListActions from '~/store/ducks/List/getList';
 import assets from '~/services/imagesImport';
-import api from '~/services/api';
 import ListCard from '~/components/ListCard';
+import LoadingComponent from '~/components/LoadingComponent';
 
 class Dashboard extends Component {
   static navigationOptions = {
@@ -34,7 +25,6 @@ class Dashboard extends Component {
   };
 
   state = {
-    credentials: null,
     tabSelected: 1,
     btn: [
       {
@@ -51,33 +41,29 @@ class Dashboard extends Component {
       },
       {
         id: 4,
-        name: 'Aprovadas',
+        name: 'Aprovar devolução',
       },
     ],
     loading: false,
-    data: null,
+    data: [],
   };
 
-    async UNSAFE_componentWillMount() {
-        this.props.setListRequest()
-    }
+  async UNSAFE_componentWillMount() {
+    this.props.setListRequest();
+  }
 
   handleTab = tab => {
     this.setState({ tabSelected: tab });
   };
 
-  redirect = data => {
+  redirect = param => {
     const { push } = this.props.navigation;
-    push('OrderDetail', { data });
+    push('OrderDetail', { data: param });
   };
 
   render() {
-      console.tron.log(this.props.data);
-
     return this.state.loading ? (
-      <Container>
-        <ActivityIndicator />
-      </Container>
+      <LoadingComponent />
     ) : (
       <Container>
         <HeaderArea>
@@ -101,39 +87,51 @@ class Dashboard extends Component {
           </RowItems>
         </HeaderArea>
 
-        {this.props.data && (
+        {this.props.clientList && (
           <Content>
             {this.state.tabSelected === 1
-              ? this.props.data.map(({ name, price_list }) => (
-                  <ListCard
-                    data={price_list}
-                    handleClick={param => this.redirect(param)}
-                    clientName={name}
-                  />
-                ))
+              ? this.props.clientList.map(
+                  ({ name, background, price_list }) => (
+                    <ListCard
+                      bg={background}
+                      data={price_list}
+                      handleClick={param => this.redirect(param)}
+                      clientName={name}
+                    />
+                  )
+                )
               : this.state.tabSelected === 2
-              ? this.props.data.map(({ name, pickup_list }) => (
-                  <ListCard
-                    data={pickup_list}
-                    handleClick={param => this.redirect(param)}
-                    clientName={name}
-                  />
-                ))
+              ? this.props.clientList.map(
+                  ({ name, background, pickup_list }) => (
+                    <ListCard
+                      data={pickup_list}
+                      handleClick={param => this.redirect(param)}
+                      clientName={name}
+                      bg={background}
+                    />
+                  )
+                )
               : this.state.tabSelected === 3
-              ? this.props.data.map(({ name, return_list }) => (
-                  <ListCard
-                    data={return_list}
-                    handleClick={param => this.redirect(param)}
-                    clientName={name}
-                  />
-                ))
-              : this.props.data.map(({ name, return_aprove_list }) => (
-                  <ListCard
-                    data={return_aprove_list}
-                    handleClick={param => this.redirect(param)}
-                    clientName={name}
-                  />
-                ))}
+              ? this.props.clientList.map(
+                  ({ name, background, return_list }) => (
+                    <ListCard
+                      data={return_list}
+                      handleClick={param => this.redirect(param)}
+                      clientName={name}
+                      bg={background}
+                    />
+                  )
+                )
+              : this.props.clientList.map(
+                  ({ name, background, return_aprove_list }) => (
+                    <ListCard
+                      data={return_aprove_list}
+                      handleClick={param => this.redirect(param)}
+                      clientName={name}
+                      bg={background}
+                    />
+                  )
+                )}
           </Content>
         )}
       </Container>
@@ -145,7 +143,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(ListActions, dispatch);
 
 const mapStateToProps = state => ({
-  data: state.List.empresas,
+  clientList: state.List.empresas,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

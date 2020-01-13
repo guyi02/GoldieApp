@@ -3,8 +3,6 @@ import { put, call } from 'redux-saga/effects';
 import ListActions from '~/store/ducks/List/getList';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { navigate } from '~/services/navigationService';
-
 export function* getList() {
   try {
     let credStorage = yield AsyncStorage.getItem('@user:credentials');
@@ -20,10 +18,10 @@ export function* getList() {
         token: user.token,
       },
     });
+
     yield put(ListActions.setListSuccess(response.data));
   } catch (err) {
     // yield put(ListActions.setListFailure(err.response));
-    console.tron.log(error);
   }
 }
 

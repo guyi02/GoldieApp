@@ -1,16 +1,42 @@
 import React, { Component } from 'react';
-import { BemVindo, Container } from './styles';
+import { View } from 'react-native';
+import { Container } from './styles';
+import EmptyList from '~/components/EmptyList';
 
 export default class Notifications extends Component {
+  static navigationOptions = {
+    title: 'Notificaçãoes',
+  };
+
+  state = {
+    data: [
+      {
+        id: 1,
+        message: 'Lista 1',
+      },
+      {
+        id: 2,
+        message: 'Lista 2',
+      },
+      {
+        id: 3,
+        message: 'Lista 3',
+      },
+      {
+        id: 4,
+        message: 'Lista 4',
+      },
+    ],
+  };
+
   render() {
     return (
       <Container>
-        <BemVindo>
-          é simplesmente uma simulação de texto da indústria tipográfica e de
-          impressos, e vem sendo utilizado desde o século XVI, quando um
-          impressor desconhecido pegou uma bandeja de tipos e os embaralhou para
-          fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não{' '}
-        </BemVindo>
+        {this.state.data.map(item => (
+          <View key={item.id}>
+            <EmptyList message={item.message} />
+          </View>
+        ))}
       </Container>
     );
   }

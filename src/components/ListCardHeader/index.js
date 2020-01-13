@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, ClientName } from './styles';
+import { Container, ClientName, Square } from './styles';
 
-const ListCardHeader = ({ clientName }) => {
+const ListCardHeader = ({ clientName, bg }) => {
   return (
     <Container>
+      <Square bg={bg} />
       <ClientName>{clientName}</ClientName>
     </Container>
   );

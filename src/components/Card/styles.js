@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-export const Container = styled.TouchableOpacity.attrs({
-})`
+export const Container = styled.TouchableOpacity.attrs({})`
   box-shadow: 2px 2px 2px #888;
   background-color: ${props => props.theme.colors.white};
   padding: 5px;
@@ -71,10 +70,10 @@ export const IconUser = styled(Icon).attrs({
 })``;
 
 export const IconArrow = styled(Icon).attrs(props => ({
-    name: 'chevron-right',
-    size: 25,
-    color: props.theme.colors.inative
-  }))``;
+  name: 'chevron-right',
+  size: 25,
+  color: props.theme.colors.inative,
+}))``;
 
 export const RowProduct = styled.View`
   flex-direction: row;
@@ -125,7 +124,7 @@ export const Sku = styled.Text`
 `;
 
 export const ValuesArea = styled.View`
-padding: 5px;
+  padding: 5px;
 `;
 export const ValuesHeader = styled.Text`
   font-size: 17px;

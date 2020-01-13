@@ -20,11 +20,43 @@ import { metrics, fonts, colors } from '~/styles';
 
 import Routes from '~/routes';
 import AsyncStorage from '@react-native-community/async-storage';
+import OneSignal from 'react-native-onesignal';
 
 export default class App extends Component {
+  constructor(properties) {
+    super(properties);
+    OneSignal.init('487cabad-41f5-41e9-9472-7b576421e35c');
+
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
+  }
+
   state = {
     user: null,
   };
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
+
+//   onReceived(notification) {
+//     console.log('Notification received: ', notification);
+//   }
+
+//   onOpened(openResult) {
+//     console.log('Message: ', openResult.notification.payload.body);
+//     console.log('Data: ', openResult.notification.payload.additionalData);
+//     console.log('isActive: ', openResult.notification.isAppInFocus);
+//     console.log('openResult: ', openResult);
+//   }
+
+//   onIds(device) {
+//     console.log('Device info: ', device);
+//   }
+
   async componentDidMount() {
     let userStorage = await AsyncStorage.getItem('@user:credentials');
     const userinfo = JSON.parse(userStorage);

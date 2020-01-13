@@ -14,8 +14,8 @@ export default class Perfil extends Component {
 
     const res = await api.post('', {
       "opt": 'logout',
-      "sign": credential?.sign,
-      "token": user?.token,
+      "sign": credential.sign,
+      "token": user.token,
     });
     if (res.data.status === 'ok') {
       await AsyncStorage.removeItem('@user:user');

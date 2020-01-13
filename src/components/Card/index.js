@@ -38,7 +38,7 @@ const Card = ({ item, handleClick }) => {
       style={{
         elevation: 2,
       }}
-      activeOpacity={0.6}
+      activeOpacity={0.9}
       onPress={() => handleClick(item)}
     >
       <Header>

@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Form,
@@ -45,9 +45,10 @@ const Login = ({ navigation }) => {
       alert('Campo senha vazio!');
       setLoading(false);
     } else {
+
       const res = await api.post('', {
-        opt: 'user',
-        sign: data?.sign,
+        "opt": 'user',
+        "sign": data.sign,
         username,
         password,
       });
